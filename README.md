@@ -68,7 +68,7 @@ Each `COLVAR.0` must contain at least the columns `time` and `distance`.
 ```python
 import numpy as np
 import pickle as pkl
-import b22_tools as b22
+import b22_from_distances as b22
 import plumed
 
 ipath = "./"
@@ -218,7 +218,7 @@ with open("Man9/data_Man9.pkl", "rb") as fp:
 
 ## Citation & license
 
-- **Authors:** see header of `b22_tools.py`.
+- **Authors:** see header of `b22_from_distances.py`.
 - **Versioning:** Semantic Versioning; current module `__version__` is updated per release.
 - **License:** GNU GENERAL PUBLIC LICENSE 
 

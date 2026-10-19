@@ -538,7 +538,18 @@ def plot_B22_variation(data, key, n_blocks, color, mode,
     xlim_min, xlim_max = x_min - x_pad, x_max + x_pad
 
     gradient = np.linspace(ylim_max, ylim_min, 500).reshape(-1, 1)
-    norm = matplotlib.colors.TwoSlopeNorm(vmin=ylim_min, vcenter=0, vmax=ylim_max)
+
+    if ylim_min < 0 < ylim_max:
+        norm = matplotlib.colors.TwoSlopeNorm(
+            vmin=ylim_min,
+            vcenter=0,
+            vmax=ylim_max
+        )
+    else:
+        norm = matplotlib.colors.Normalize(
+            vmin=ylim_min,
+            vmax=ylim_max
+        )
     ax1.imshow(
         gradient, aspect='auto', cmap='RdBu_r', norm=norm,
         extent=[xlim_min, xlim_max, ylim_min, ylim_max],
@@ -672,7 +683,18 @@ def plot_B22_bar_chart(height, yerr, labels,
     xlim_min, xlim_max = x_values.min() - x_pad, x_values.max() + x_pad
 
     gradient = np.linspace(ylim_max, ylim_min, 500).reshape(-1, 1)
-    norm = matplotlib.colors.TwoSlopeNorm(vmin=ylim_min, vcenter=0, vmax=ylim_max)
+    
+    if ylim_min < 0 < ylim_max:
+        norm = matplotlib.colors.TwoSlopeNorm(
+            vmin=ylim_min,
+            vcenter=0,
+            vmax=ylim_max
+        )
+    else:
+        norm = matplotlib.colors.Normalize(
+            vmin=ylim_min,
+            vmax=ylim_max
+        )
     ax1.imshow(
         gradient, aspect='auto', cmap='RdBu_r', norm=norm,
         extent=[xlim_min, xlim_max, ylim_min, ylim_max],

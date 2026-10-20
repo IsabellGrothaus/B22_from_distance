@@ -683,7 +683,7 @@ def plot_B22_bar_chart(height, yerr, labels,
     xlim_min, xlim_max = x_values.min() - x_pad, x_values.max() + x_pad
 
     gradient = np.linspace(ylim_max, ylim_min, 500).reshape(-1, 1)
-    
+
     if ylim_min < 0 < ylim_max:
         norm = matplotlib.colors.TwoSlopeNorm(
             vmin=ylim_min,
@@ -751,11 +751,16 @@ def plot_B22_bar_chart(height, yerr, labels,
 # Physics helpers
 # ---------------------------
 
-def get_k(k_in_kj_per_mol_per_nm2: float, T: float = 300) -> float:
+def get_k(k_in_kj_per_mol_per_nm2: float, T: float = 300, scaled: bool = False, Lx: float = 1) -> float:
     """Convert k from kJ/mol/nm^2 to kBT/nm^2 at temperature ``T``.
     Uses 1 kBT = 2.479 kJ/mol at 298 K.
     """
-    k_in_kbT_per_nm2 = k_in_kj_per_mol_per_nm2 / 2.479 * (298 / T)
+    if scaled is True:
+        k_phys = k_in_kj_per_mol_per_nm2 / Lx**2
+        k_in_kbT_per_nm2 = k_phys/ 2.479 * (298 / T)
+    else:
+        k_in_kbT_per_nm2 = k_in_kj_per_mol_per_nm2 / 2.479 * (298 / T)
+    
     return float(k_in_kbT_per_nm2)
 
 
